@@ -1,9 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+
+	"mastodon-ai/config"
 )
 
 func healthCheck(c *gin.Context) {
@@ -13,6 +16,9 @@ func healthCheck(c *gin.Context) {
 }
 
 func main() {
+	cfg := config.LoadConfig()
+	fmt.Println(cfg) // temporary
+
 	r := gin.Default()
 	r.GET("/health", healthCheck)
 	r.Run(":8000")
