@@ -2,19 +2,22 @@ package config
 
 import (
 	"os"
+
+	"github.com/openai/openai-go"
 )
 
 type Config struct {
-	OpenAIAPIKey	string
-	MastodonAPIKey	string
-	MastodonURL	string
+	OpenAIClient   *openai.Client
+	MastodonAPIKey string
+	MastodonURL    string
 }
 
 func LoadConfig() *Config {
+	openaiClient := openai.NewClient() // os.LookupEnv("OPENAI_API_KEY")
 	return &Config{
-		OpenAIAPIKey: getEnv("OPENAI_API_KEY"),
+		OpenAIClient:   openaiClient,
 		MastodonAPIKey: getEnv("MASTODON_API_KEY"),
-		MastodonURL: getEnv("MASTODON_URL"),
+		MastodonURL:    getEnv("MASTODON_URL"),
 	}
 }
 
