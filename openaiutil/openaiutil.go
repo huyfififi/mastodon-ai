@@ -1,13 +1,10 @@
 package openaiutil
 
 import (
-	"net/http"
-
-	"github.com/gin-gonic/gin"
+	"mastodon-ai/config"
 )
 
-func GenerateAIPost(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Hello, world!",
-	})
+func GenerateAIPost(cfg *config.Config) string {
+	post := "Hello, world!" + cfg.MastodonURL
+	return post
 }

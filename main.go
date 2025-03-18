@@ -26,6 +26,14 @@ func startScheduler() {
 	}
 }
 
+func generateAIPostHandler(c *gin.Context, cfg *config.Config) {
+	postContent := openaiutil.GenerateAIPost(cfg)
+
+	c.JSON(http.StatusOK, gin.H{
+		"content": postContent,
+	})
+}
+
 func main() {
 	cfg := config.LoadConfig()
 	fmt.Println(cfg) // temporary
@@ -34,6 +42,8 @@ func main() {
 
 	r := gin.Default()
 	r.GET("/health", healthCheck)
-	r.POST("/ai-post", openaiutil.GenerateAIPost)
+	r.POST("/ai-post", func(c *gin.Context) {
+		generateAIPostHandler(c, cfg)
+	})
 	r.Run(":8000")
 }
