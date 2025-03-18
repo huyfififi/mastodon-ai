@@ -1,4 +1,4 @@
-package openai
+package openaiutil
 
 import (
 	"net/http"

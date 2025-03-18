@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"mastodon-ai/config"
 	"mastodon-ai/mastodon"
-	"mastodon-ai/openai"
+	"mastodon-ai/openaiutil"
 )
 
 func healthCheck(c *gin.Context) {
@@ -34,6 +34,6 @@ func main() {
 
 	r := gin.Default()
 	r.GET("/health", healthCheck)
-	r.POST("/ai-post", openai.GenerateAIPost)
+	r.POST("/ai-post", openaiutil.GenerateAIPost)
 	r.Run(":8000")
 }
